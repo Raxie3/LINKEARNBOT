@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 
 
-const port = 3000;
+const port = 8000;
 
 app.listen(port, () => {
 
@@ -86,7 +86,7 @@ bot.onText(/\/start/, (msg) => {
 
 
 
-  bot.sendPhoto(chatId, "https://envs.sh/dn1.jpg", {
+  bot.sendPhoto(chatId, "https://i.ibb.co/dsQTPBnc/temp.jpg", {
 
     caption: welcomeMessage,
 
