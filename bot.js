@@ -48,13 +48,13 @@ bot.onText(/\/start/, (msg) => {
 
     + `<b>Welcome to the IndiaEarnX URL Shortener Bot!</b>\n`
 
-    + `<b>You can use this bot to shorten URLs using the indiaearnx.com API service.</b>\n\n`
+    + `<b>You can use this bot to shorten URLs using the LinkEarnX.In API service.</b>\n\n`
 
     + `<b>To shorten a URL, just type or paste the URL directly in the chat, and the bot will provide you with the shortened URL.</b>\n\n`
 
-    + `<b>If you haven't set your IndiaEarnX API token yet, use the command:</b>\n<code>/setapi YOUR_IndiaEarnx_API_TOKEN</code>\n\n`
+    + `<b>If you haven't set your LinkEarnX API token yet, use the command:</b>\n<code>/setapi YOUR_LinkEarnx_API_TOKEN</code>\n\n`
 
-    + `<b>Example:</b>\n<code>/setapi c49399f821fc020161bc2a31475ec59f35ae5b4</code>`;
+    + `<b>Example:</b>\n<code>/setapi 32ca9882210b1fbe3e2382848f1cabbf904bd2e4</code>`;
 
 
 
@@ -66,15 +66,15 @@ bot.onText(/\/start/, (msg) => {
 
         [
 
-          { text: "Chat with Admin", url: "t.me/IndiaEarnXsupport" },
+          { text: "Chat with Admin", url: "https://t.me/OfficialSwiftCart" },
 
-          { text: "Payment Proof", url: "t.me/IndiaEarnx_Payment_Proofs" }
+          { text: "Payment Proof", url: "https://t.me/OfficialSwiftCart" }
 
         ],
 
         [
 
-          { text: "Get API Token from Here", url: "https://indiaearnx.com/member/tools/quick" }
+          { text: "Get API Token from Here", url: "https://softurl.in/member/tools/quick" }
 
         ]
 
@@ -112,7 +112,7 @@ bot.onText(/\/setapi (.+)/, (msg, match) => {
 
   saveUserToken(chatId, userToken);
 
-  bot.sendMessage(chatId, `IndiaEarnX API token set successfully. Your token: ${userToken}`);
+  bot.sendMessage(chatId, `LinkEarnX API token set successfully. Your token: ${userToken}`);
 
 });
 
@@ -130,7 +130,7 @@ bot.on("message", async (msg) => {
 
     let arklinksToken = getUserToken(chatId);
     if (!arklinksToken) {
-      bot.sendMessage(chatId, "Please set your IndiaEarnX API token first using:\n/setapi YOUR_API_TOKEN");
+      bot.sendMessage(chatId, "Please set your LinkEarnX API token first using:\n/setapi YOUR_API_TOKEN");
       return;
     }
 
@@ -141,7 +141,7 @@ bot.on("message", async (msg) => {
     for (const entity of urlEntities.reverse()) {
       const url = entity.type === 'text_link' ? entity.url : text.substring(entity.offset, entity.offset + entity.length);
       try {
-        const apiUrl = `https://indiaearnx.com/api?api=${arklinksToken}&url=${url}`;
+        const apiUrl = `https://softurl.in/api?api=${arklinksToken}&url=${url}`;
         const response = await axios.get(apiUrl);
         const shortUrl = response.data.shortenedUrl;
 
@@ -169,13 +169,13 @@ bot.on("message", async (msg) => {
 
     let arklinksToken = getUserToken(chatId);
     if (!arklinksToken) {
-      bot.sendMessage(chatId, "Please set your IndiaEarnX API token first using:\n/setapi YOUR_API_TOKEN");
+      bot.sendMessage(chatId, "Please set your LinkEarnX API token first using:\n/setapi YOUR_API_TOKEN");
       return;
     }
 
     for (const url of urls) {
       try {
-        const apiUrl = `https://indiaearnx.com/api?api=${arklinksToken}&url=${url}`;
+        const apiUrl = `https://softurl.in/api?api=${arklinksToken}&url=${url}`;
         const response = await axios.get(apiUrl);
         const shortUrl = response.data.shortenedUrl;
         await bot.sendMessage(chatId, `Shortened: ${shortUrl}`);
@@ -199,7 +199,7 @@ async function shortenUrlAndSend(chatId, Url) {
 
   if (!arklinksToken) {
 
-    bot.sendMessage(chatId, "Please provide your IndiaEarnX API token first. Use the command: /setapi YOUR_IndiaEarnX_API_TOKEN");
+    bot.sendMessage(chatId, "Please provide your LinkEarnX API token first. Use the command: /setapi YOUR_LinkEarnX_API_TOKEN");
 
     return;
 
@@ -209,7 +209,7 @@ async function shortenUrlAndSend(chatId, Url) {
 
   try {
 
-    const apiUrl = `https://indiaearnx.com/api?api=${arklinksToken}&url=${Url}`;
+    const apiUrl = `https://softurl.in/api?api=${arklinksToken}&url=${Url}`;
 
     const response = await axios.get(apiUrl);
 
