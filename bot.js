@@ -46,7 +46,7 @@ bot.onText(/\/start/, (msg) => {
 
   const welcomeMessage = `<b>Hello, ${username}!</b>\n\n`
 
-    + `<b>Welcome to the IndiaEarnX URL Shortener Bot!</b>\n`
+    + `<b>Welcome to the LinkEarnX URL Shortener Bot!</b>\n`
 
     + `<b>You can use this bot to shorten URLs using the LinkEarnX.In API service.</b>\n\n`
 
