@@ -118,10 +118,9 @@ bot.onText(/\/setapi (.+)/, (msg, match) => {
 
 
 
-// Command: /balance
 bot.onText(/\/balance/, async (msg) => {
   const chatId = msg.chat.id;
-  const userToken = getUserToken(chatId);
+  const userToken = getUserToken(chatId); // Fetch user token from database
 
   if (!userToken) {
     bot.sendMessage(chatId, "❌ Please set your LinkEarnX API token first using:\n/setapi YOUR_API_TOKEN");
@@ -129,35 +128,35 @@ bot.onText(/\/balance/, async (msg) => {
   }
 
   try {
+    // Make request to LinkEarnX API
     const apiUrl = `https://softurl.in/api?api=${userToken}&action=user_data`;
     const response = await axios.get(apiUrl);
     const data = response.data;
 
-    // Debugging ke liye log response
-    console.log("✅ API Response (Balance):", data);
+    // Debugging output (optional, remove in production)
+    console.log("Balance API Response:", data);
 
-    if (!data || data.status === 'error' || data.message?.toLowerCase().includes("invalid")) {
-      bot.sendMessage(chatId, `❌ Error: ${data.message || "Invalid API token or API response."}`);
+    // Handle error from API
+    if (data.status === 'error' || !data.username || !data.balance) {
+      bot.sendMessage(chatId, `❌ Error: ${data.message || "Invalid API token or failed to fetch data."}`);
       return;
     }
 
+    // Format user info
     const userInfo = `
 <b>👤 Username:</b> ${data.username}
 <b>📧 Email:</b> ${data.email}
-<b>🔑 Your API Token:</b> ${userToken}
-
-<b>💰 Current Balance:</b> $${data.balance}
-<b>🎁 Referral Income:</b> $${data.referral_earnings}
+<b>💰 Balance:</b> $${data.balance}
+<b>🎁 Referral Earnings:</b> $${data.referral_earnings || 0}
     `;
 
     bot.sendMessage(chatId, userInfo, { parse_mode: "HTML" });
 
-  } catch (err) {
-    console.error("❌ Balance fetch error:", err.message);
-    bot.sendMessage(chatId, "⚠️ Failed to fetch balance. Please check your API token or try again later.");
+  } catch (error) {
+    console.error("Error fetching balance:", error.message);
+    bot.sendMessage(chatId, "⚠️ Failed to fetch balance. Please try again later.");
   }
 });
-
 
 
 
