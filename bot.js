@@ -129,11 +129,15 @@ bot.onText(/\/balance/, async (msg) => {
   }
 
   try {
-    const response = await axios.get(`https://softurl.in/api?api=${userToken}&action=user_data`);
+    const apiUrl = `https://softurl.in/api?api=${userToken}&action=user_data`;
+    const response = await axios.get(apiUrl);
     const data = response.data;
 
-    if (data.status === 'error') {
-      bot.sendMessage(chatId, `❌ Error: ${data.message || "Invalid API token or request."}`);
+    // Debugging ke liye log response
+    console.log("✅ API Response (Balance):", data);
+
+    if (!data || data.status === 'error' || data.message?.toLowerCase().includes("invalid")) {
+      bot.sendMessage(chatId, `❌ Error: ${data.message || "Invalid API token or API response."}`);
       return;
     }
 
@@ -149,7 +153,7 @@ bot.onText(/\/balance/, async (msg) => {
     bot.sendMessage(chatId, userInfo, { parse_mode: "HTML" });
 
   } catch (err) {
-    console.error("Balance fetch error:", err.message);
+    console.error("❌ Balance fetch error:", err.message);
     bot.sendMessage(chatId, "⚠️ Failed to fetch balance. Please check your API token or try again later.");
   }
 });
