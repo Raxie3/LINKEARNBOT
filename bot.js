@@ -63,30 +63,26 @@ const welcomeMessage = `<b>👋 Hello, ${username}!</b>\n\n` +
 
 
   const options = {
-
-    reply_markup: JSON.stringify({
-
-      inline_keyboard: [
-
-        [
-
-          { text: "Chat with Admin", url: "https://t.me/OfficialSwiftCart" },
-
-          { text: "Payment Proof", url: "https://t.me/OfficialSwiftCart" }
-
-        ],
-
-        [
-
-          { text: "Get API Token from Here", url: "https://softurl.in/member/tools/quick" }
-
-        ]
-
+  reply_markup: JSON.stringify({
+    inline_keyboard: [
+      [
+        { text: "💬 Chat with Admin", url: "https://t.me/LinkEarnX_Official" },
+        { text: "📸 Payment Proof", url: "https://t.me/LinkEarnX_Official" }
+      ],
+      [
+        { text: "🔑 Get API Token", url: "https://softurl.in/member/tools/quick" }
+      ],
+      [
+        { text: "📢 Join Updates Channel", url: "https://t.me/LinkEarnX_Official" },
+        { text: "💡 How It Works?", url: "https://t.me/LinkEarnX_Official" }
+      ],
+      [
+        { text: "🚀 Share This Bot", url: "https://telegram.me/share/url?url=https://t.me/LinkEarnXBot" }
       ]
+    ]
+  })
+};
 
-    })
-
-  };
 
 
 
