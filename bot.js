@@ -44,17 +44,21 @@ bot.onText(/\/start/, (msg) => {
 
 
 
-const welcomeMessage = `<b>🎉 Welcome to the LinkEarnX URL Shortener Bot! 🔗✨</b>\n` +
-  `<b>Your one-stop solution to shorten URLs & earn money effortlessly! 💸🚀</b>\n\n` +
+const welcomeMessage = `<b>👋 Hello, ${username}!</b>\n\n` +
 
-  `<b>🔧 How to Use:</b>\n` +
-  `Just send any URL directly in the chat, and the bot will instantly return a shortened version! ⚡🧿\n\n` +
+  `<b>🎉 Welcome to the <u>LinkEarnX URL Shortener Bot</u>! 🔗✨</b>\n` +
+  `<b>Your one-stop solution to <i>shorten URLs</i> & <i>earn money effortlessly</i>! 💸🚀</b>\n\n` +
 
-  `<b>🔐 First time here? Set your API token like this:</b>\n` +
+  `🔥 <b><u>How to Use:</u></b>\n` +
+  `👉 Just send any <b>URL</b> directly in the chat, and the bot will instantly reply with your <b>shortened link</b>! ⚡🧿\n\n` +
+
+  `🔐 <b><u>First time here?</u></b>\n` +
+  `Paste your API token using:\n` +
   `<code>/setapi YOUR_LinkEarnX_API_TOKEN</code>\n\n` +
 
-  `<b>🧪 Example:</b>\n` +
+  `🧪 <b>Example:</b>\n` +
   `<code>/setapi 32ca9882210b1fbe3e2382848f1cabbf904bd2e4</code>`;
+
 
 
 
