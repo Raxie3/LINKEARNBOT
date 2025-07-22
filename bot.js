@@ -118,45 +118,50 @@ bot.onText(/\/setapi (.+)/, (msg, match) => {
 
 
 
+const axios = require('axios');
+
+// /balance command
 bot.onText(/\/balance/, async (msg) => {
   const chatId = msg.chat.id;
-  const userToken = getUserToken(chatId); // Fetch user token from database
+
+  const userToken = getUserToken(chatId); // ये function पहले से defined होना चाहिए जो user का token return करता हो
 
   if (!userToken) {
     bot.sendMessage(chatId, "❌ Please set your LinkEarnX API token first using:\n/setapi YOUR_API_TOKEN");
     return;
   }
 
+  // Debugging logs — Render पर दिखेगा log में
+  console.log("Token used:", userToken);
+  const apiURL = `https://softurl.in/api?api=${userToken}&action=user_data`;
+  console.log("Calling:", apiURL);
+
   try {
-    // Make request to LinkEarnX API
-    const apiUrl = `https://softurl.in/api?api=${userToken}&action=user_data`;
-    const response = await axios.get(apiUrl);
+    const response = await axios.get(apiURL);
     const data = response.data;
 
-    // Debugging output (optional, remove in production)
-    console.log("Balance API Response:", data);
-
-    // Handle error from API
-    if (data.status === 'error' || !data.username || !data.balance) {
-      bot.sendMessage(chatId, `❌ Error: ${data.message || "Invalid API token or failed to fetch data."}`);
+    if (!data || data.status === 'error' || !data.username) {
+      bot.sendMessage(chatId, `❌ Error: ${data.message || "Invalid API token or user not found."}`);
       return;
     }
 
-    // Format user info
     const userInfo = `
 <b>👤 Username:</b> ${data.username}
 <b>📧 Email:</b> ${data.email}
-<b>💰 Balance:</b> $${data.balance}
-<b>🎁 Referral Earnings:</b> $${data.referral_earnings || 0}
+<b>🔑 Your API Token:</b> ${userToken}
+
+<b>💰 Current Balance:</b> $${data.balance}
+<b>🎁 Referral Income:</b> $${data.referral_earnings}
     `;
 
     bot.sendMessage(chatId, userInfo, { parse_mode: "HTML" });
 
   } catch (error) {
-    console.error("Error fetching balance:", error.message);
-    bot.sendMessage(chatId, "⚠️ Failed to fetch balance. Please try again later.");
+    console.error("API Error:", error.message);
+    bot.sendMessage(chatId, "⚠️ Something went wrong while fetching balance. Please try again later.");
   }
 });
+
 
 
 
