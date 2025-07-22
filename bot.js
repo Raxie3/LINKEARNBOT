@@ -118,6 +118,45 @@ bot.onText(/\/setapi (.+)/, (msg, match) => {
 
 
 
+// Command: /balance
+bot.onText(/\/balance/, async (msg) => {
+  const chatId = msg.chat.id;
+  const userToken = getUserToken(chatId);
+
+  if (!userToken) {
+    bot.sendMessage(chatId, "❌ Please set your LinkEarnX API token first using:\n/setapi YOUR_API_TOKEN");
+    return;
+  }
+
+  try {
+    const response = await axios.get(`https://softurl.in/api?api=${userToken}&action=user_data`);
+    const data = response.data;
+
+    if (data.status === 'error') {
+      bot.sendMessage(chatId, `❌ Error: ${data.message || "Invalid API token or request."}`);
+      return;
+    }
+
+    const userInfo = `
+<b>👤 Username:</b> ${data.username}
+<b>📧 Email:</b> ${data.email}
+<b>🔑 Your API Token:</b> ${userToken}
+
+<b>💰 Current Balance:</b> $${data.balance}
+<b>🎁 Referral Income:</b> $${data.referral_earnings}
+    `;
+
+    bot.sendMessage(chatId, userInfo, { parse_mode: "HTML" });
+
+  } catch (err) {
+    console.error("Balance fetch error:", err.message);
+    bot.sendMessage(chatId, "⚠️ Failed to fetch balance. Please check your API token or try again later.");
+  }
+});
+
+
+
+
 // Handle URL shortening
 
 bot.on("message", async (msg) => {
