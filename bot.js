@@ -118,53 +118,6 @@ bot.onText(/\/setapi (.+)/, (msg, match) => {
 
 
 
-const axios = require('axios');
-
-// /balance command
-bot.onText(/\/balance/, async (msg) => {
-  const chatId = msg.chat.id;
-
-  const userToken = getUserToken(chatId); // ये function पहले से defined होना चाहिए जो user का token return करता हो
-
-  if (!userToken) {
-    bot.sendMessage(chatId, "❌ Please set your LinkEarnX API token first using:\n/setapi YOUR_API_TOKEN");
-    return;
-  }
-
-  // Debugging logs — Render पर दिखेगा log में
-  console.log("Token used:", userToken);
-  const apiURL = `https://softurl.in/api?api=${userToken}&action=user_data`;
-  console.log("Calling:", apiURL);
-
-  try {
-    const response = await axios.get(apiURL);
-    const data = response.data;
-
-    if (!data || data.status === 'error' || !data.username) {
-      bot.sendMessage(chatId, `❌ Error: ${data.message || "Invalid API token or user not found."}`);
-      return;
-    }
-
-    const userInfo = `
-<b>👤 Username:</b> ${data.username}
-<b>📧 Email:</b> ${data.email}
-<b>🔑 Your API Token:</b> ${userToken}
-
-<b>💰 Current Balance:</b> $${data.balance}
-<b>🎁 Referral Income:</b> $${data.referral_earnings}
-    `;
-
-    bot.sendMessage(chatId, userInfo, { parse_mode: "HTML" });
-
-  } catch (error) {
-    console.error("API Error:", error.message);
-    bot.sendMessage(chatId, "⚠️ Something went wrong while fetching balance. Please try again later.");
-  }
-});
-
-
-
-
 // Handle URL shortening
 
 bot.on("message", async (msg) => {
