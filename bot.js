@@ -57,7 +57,7 @@ const welcomeMessage = `<b>👋 Hello, ${username}!</b>\n\n` +
   `<code>/setapi YOUR_LinkEarnX_API_TOKEN</code>\n\n` +
 
   `🧪 <b>Example:</b>\n` +
-  `<code>/setapi 32ca9882210b1fbe3e2382848f1cabbf904bd2e4</code>`;
+  `<code>/setapi 534fc9df398bebe366b7efa1a0ee5a88536f0bf1</code>`;
 
 
 
@@ -66,11 +66,11 @@ const welcomeMessage = `<b>👋 Hello, ${username}!</b>\n\n` +
   reply_markup: JSON.stringify({
     inline_keyboard: [
       [
-        { text: "💬 Chat with Admin", url: "https://t.me/LinkEarnX_Official" },
+        { text: "💬 Chat with Admin", url: "https://t.me/LinkEarnXSupport" },
         { text: "📸 Payment Proof", url: "https://t.me/LinkEarnX_Official" }
       ],
       [
-        { text: "🔑 Get API Token", url: "https://softurl.in/member/tools/quick" }
+        { text: "🔑 Get API Token", url: "https://linkearnx.com/member/tools/quick" }
       ],
       [
         { text: "📢 Join Updates Channel", url: "https://t.me/LinkEarnX_Official" },
@@ -141,7 +141,7 @@ bot.on("message", async (msg) => {
     for (const entity of urlEntities.reverse()) {
       const url = entity.type === 'text_link' ? entity.url : text.substring(entity.offset, entity.offset + entity.length);
       try {
-        const apiUrl = `https://softurl.in/api?api=${arklinksToken}&url=${url}`;
+        const apiUrl = `https://linkearnx.com/api?api=${arklinksToken}&url=${url}`;
         const response = await axios.get(apiUrl);
         const shortUrl = response.data.shortenedUrl;
 
@@ -209,7 +209,7 @@ async function shortenUrlAndSend(chatId, Url) {
 
   try {
 
-    const apiUrl = `https://softurl.in/api?api=${arklinksToken}&url=${Url}`;
+    const apiUrl = `https://linkearnx.com/api?api=${arklinksToken}&url=${Url}`;
 
     const response = await axios.get(apiUrl);
 
