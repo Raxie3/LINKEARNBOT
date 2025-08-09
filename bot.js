@@ -67,14 +67,14 @@ const welcomeMessage = `<b>👋 Hello, ${username}!</b>\n\n` +
     inline_keyboard: [
       [
         { text: "💬 Chat with Admin", url: "https://t.me/LinkEarnXSupport" },
-        { text: "📸 Payment Proof", url: "https://t.me/LinkEarnX_Official" }
+        { text: "📸 Chat Group", url: "https://t.me/+zppHuxV20jE4YjE9" }
       ],
       [
         { text: "🔑 Get API Token", url: "https://linkearnx.com/member/tools/quick" }
       ],
       [
         { text: "📢 Join Updates Channel", url: "https://t.me/LinkEarnX_Official" },
-        { text: "💡 How It Works?", url: "https://t.me/LinkEarnX_Official" }
+        { text: "💡 How It Works?", url: "https://t.me/LinkEarnX_Official/24" }
       ],
       [
         { text: "🚀 Share This Bot", url: "https://telegram.me/share/url?url=https://t.me/LinkEarnXBot" }
@@ -272,3 +272,4 @@ function getDatabaseData() {
   }
 
 }
+
